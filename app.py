@@ -90,31 +90,47 @@ def message_results():
 @app.route('/calculator')
 def calculator():
     """Shows the user a form to enter 2 numbers and an operation."""
-    return """
-    <form action="/calculator_results" method="GET">
-        Please enter 2 numbers and select an operator.<br/><br/>
-        <input type="number" name="operand1">
-        <select name="operation">
-            <option value="add">+</option>
-            <option value="subtract">-</option>
-            <option value="multiply">*</option>
-            <option value="divide">/</option>
-        </select>
-        <input type="number" name="operand2">
-        <input type="submit" value="Submit!">
-    </form>
-    """
+    # Part 1 code. Refactored in part 2.
+    # return """
+    # <form action="/calculator_results" method="GET">
+    #     Please enter 2 numbers and select an operator.<br/><br/>
+    #     <input type="number" name="operand1">
+    #     <select name="operation">
+    #         <option value="add">+</option>
+    #         <option value="subtract">-</option>
+    #         <option value="multiply">*</option>
+    #         <option value="divide">/</option>
+    #     </select>
+    #     <input type="number" name="operand2">
+    #     <input type="submit" value="Submit!">
+    # </form>
+    # """
+    return render_template('calculator_form.html')
 
 @app.route('/calculator_results')
 def calculator_results():
     """Shows the user the result of their calculation."""
     provided_operand1 = request.args.get('operand1')
-    selected_operation = request.args.get('operation')
     provided_operand2 = request.args.get('operand2')
+    selected_operation = request.args.get('operation')
+
     if selected_operation == "add":
         result = int(provided_operand1) + int(provided_operand2)
+    elif selected_operation == "subtract":
+        result = int(provided_operand1) - int(provided_operand2)
+    elif selected_operation == "multiply":
+        result = int(provided_operand1) * int(provided_operand2)
+    else:
+        result = int(provided_operand1) / int(provided_operand2)
 
-    return f'You chose to {selected_operation} {provided_operand1} and {provided_operand2}.  Your result is: {result}'
+    context = {
+    'provided_operand1': request.args.get('operand1'),
+    'provided_operand2': request.args.get('operand2'),
+    'selected_operation': request.args.get('operation'),
+    'result': result
+    }
+
+    return render_template('calculator_results.html', **context)
 
 
 
