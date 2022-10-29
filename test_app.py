@@ -122,8 +122,8 @@ class TestApp(unittest.TestCase):
 
     def test_horoscope_taurus(self):
         random.seed(3)
-        
-        res = app.test_client().get('/horoscope_results?users_name=Moxie&horoscope_sign=aries')
+
+        res = app.test_client().get('/horoscope_results?users_name=Moxie&horoscope_sign=taurus')
         self.assertEqual(res.status_code, 200)
 
 
