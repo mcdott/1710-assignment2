@@ -5,8 +5,16 @@
   </head>
   <body>
     <p>
-      You chose to {{selected_operation}} {{provided_operand1}} and
-      {{provided_operand2}}. Your result is: {{result}}
+      {% if selected_operation == "add" %} You chose to add
+      {{provided_operand1}} and {{provided_operand2}}. Your result is:
+      {{(provided_operand1 + provided_operand2)}} {% elif selected_operation ==
+      "subtract": %} You chose to subtract {{provided_operand1}} and
+      {{provided_operand2}}. Your result is: {{(provided_operand1 -
+      provided_operand2)}} {% elif selected_operation == "multiply": %} You
+      chose to multiply {{provided_operand1}} and {{provided_operand2}}. Your
+      result is: {{(provided_operand1 * provided_operand2)}} {% else: %} You
+      chose to divide {{provided_operand1}} and {{provided_operand2}}. Your
+      result is: {{(provided_operand1 / provided_operand2)}} {% endif %}
     </p>
   </body>
 </html>
