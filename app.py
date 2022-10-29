@@ -1,3 +1,4 @@
+from unittest import result
 from flask import Flask, request, render_template
 import random
 
@@ -97,7 +98,14 @@ def calculator():
 @app.route('/calculator_results')
 def calculator_results():
     """Shows the user the result of their calculation."""
-    pass
+    provided_operand1 = request.args.get('operand1')
+    selected_operation = request.args.get('operation')
+    provided_operand2 = request.args.get('operand2')
+    if selected_operation == "add":
+        result = int(provided_operand1) + int(provided_operand2)
+
+    return f'You chose to {selected_operation} {provided_operand1} and {provided_operand2}.  Your result is: {result}'
+
 
 
 HOROSCOPE_PERSONALITIES = {
