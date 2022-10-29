@@ -156,19 +156,24 @@ def horoscope_form():
 @app.route('/horoscope_results')
 def horoscope_results():
     """Shows the user the result for their chosen horoscope."""
+    # Get the name the user entered in the form
+    users_name = request.args.get('users_name')
 
-    # TODO: Get the sign the user entered in the form, based on their birthday
-    horoscope_sign = ''
+    # Get the sign the user entered in the form, based on their birthday
+    users_sign = request.args.get('horoscope_sign')
 
-    # TODO: Look up the user's personality in the HOROSCOPE_PERSONALITIES
+    # Look up the user's personality in the HOROSCOPE_PERSONALITIES
     # dictionary based on what the user entered
-    users_personality = ''
-
-    # TODO: Generate a random number from 1 to 99
-    lucky_number = 0
+    for sign, personality in HOROSCOPE_PERSONALITIES.items():
+        if sign == users_sign:
+            users_personality = personality
+    
+    # Generate a random number from 1 to 99
+    lucky_number = random.randint(1, 99)
 
     context = {
-        'horoscope_sign': horoscope_sign,
+        'name': users_name,
+        'horoscope_sign': users_sign,
         'personality': users_personality, 
         'lucky_number': lucky_number
     }
