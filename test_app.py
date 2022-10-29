@@ -121,9 +121,11 @@ class TestApp(unittest.TestCase):
         self.assertIn('18', result_page_text)
 
     def test_horoscope_taurus(self):
+        random.seed(3)
+        
         res = app.test_client().get('/horoscope_results?users_name=Moxie&horoscope_sign=aries')
         self.assertEqual(res.status_code, 200)
-        random.seed(3)
+
 
         result_page_text = res.get_data(as_text=True)
         self.assertIn('Moxie', result_page_text)
