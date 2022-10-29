@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Calculator Results</title>
-    </head>
-    <body>
-        <!-- Your HTML code goes here! -->
-
-
-
-
-
-        
-    </body>
+  <head>
+    <title>Calculator Results</title>
+  </head>
+  <body>
+    {% if selected_operation == "add" %}
+    <p>
+      You chose to add {{provided_operand1}} and {{provided_operand2}}. Your
+      result is: {{(provided_operand1 + provided_operand2)}}
+    </p>
+    {% elif selected_operation == "subtract": %}
+    <p>
+      You chose to subtract {{provided_operand1}} and {{provided_operand2}}.
+      Your result is: {{(provided_operand1 - provided_operand2)}}
+    </p>
+    {% elif selected_operation == "multiply": %}
+    <p>
+      You chose to multiply {{provided_operand1}} and {{provided_operand2}}.
+      Your result is: {{(provided_operand1 * provided_operand2)}}
+    </p>
+    {% else: %}
+    <p>
+      You chose to divide {{provided_operand1}} and {{provided_operand2}}. Your
+      result is: {{(provided_operand1 / provided_operand2)}}
+    </p>
+    {% endif %}
+  </body>
 </html>
